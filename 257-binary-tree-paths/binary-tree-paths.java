@@ -13,28 +13,29 @@
  *     }
  * }
  */
- class Solution {
-    List<String> result = new ArrayList<>();
+class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
-        if(root==null){
-            return result;
+        List<String> result = new ArrayList<>();
+        if (root == null) return result;
+        String currentPath = Integer.toString(root.val);
+
+        if (root.left == null && root.right == null) {
+            result.add(currentPath);
         }
-        inorder(root,new StringBuilder());
+
+        if (root.left != null) dfs(root.left, currentPath, result);
+        if (root.right != null) dfs(root.right, currentPath, result);
+
         return result;
     }
-    public void inorder(TreeNode root,StringBuilder sb){
-        if(root==null){
+    public void dfs(TreeNode node, String currentPath, List<String> result) {
+        currentPath += "->" + node.val;
+
+        if (node.left == null && node.right == null) {
+            result.add(currentPath);
             return;
         }
-        if(sb.length()>0){
-            sb.append("->");
-        }
-        sb.append(Integer.toString(root.val));
-        if(root.left==null && root.right==null){
-            result.add(sb.toString());
-        }
-             inorder(root.left, new StringBuilder(sb));
-             inorder(root.right, new StringBuilder(sb));
-  
+        if (node.left != null) dfs(node.left, currentPath, result);
+        if (node.right != null) dfs(node.right, currentPath, result);
     }
 }
