@@ -22,7 +22,6 @@ class Solution {
         if (root.left == null && root.right == null) {
             result.add(currentPath);
         }
-
         if (root.left != null) dfs(root.left, currentPath, result);
         if (root.right != null) dfs(root.right, currentPath, result);
 
