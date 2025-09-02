@@ -20,6 +20,7 @@ class Solution {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         boolean leftToRight = true; // direction flag
+
         while (!queue.isEmpty()) {
             int size = queue.size();
             LinkedList<Integer> level = new LinkedList<>();
