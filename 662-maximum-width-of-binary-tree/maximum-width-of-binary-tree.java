@@ -13,20 +13,45 @@
  *     }
  * }
  */
+import java.util.*;
+
 class Solution {
-     private Map<Integer, Long> firstIndexMap = new HashMap<>();
-    private int maxWidth = 0;
     public int widthOfBinaryTree(TreeNode root) {
-      dfs(root, 0, 0L);
+        if (root == null) return 0;
+
+        int maxWidth = 0;
+        Queue<Pair<TreeNode,Long>> queue =new LinkedList<>();
+        queue.offer(new Pair<>(root, 0L));
+
+        while (!queue.isEmpty()) {
+            int size =queue.size();
+            long minIndex =queue.peek().getValue();
+            long first = 0,last = 0;
+
+            for (int i = 0; i < size; i++) {
+                Pair<TreeNode, Long> current = queue.poll();
+                TreeNode node = current.getKey();
+                long index = current.getValue() - minIndex; 
+                if (i ==0) first = index;
+                if (i == size-1) last = index;
+                if (node.left != null)
+                    queue.offer(new Pair<>(node.left,2 * index + 1));
+                if (node.right != null)
+                    queue.offer(new Pair<>(node.right,2* index +2));
+            }
+            maxWidth= Math.max(maxWidth,(int)(last - first +1));
+        }
         return maxWidth;
     }
-    private void dfs(TreeNode node,int depth, long index) {
-        if (node == null) return;
-        firstIndexMap.putIfAbsent(depth,index);
-        int width = (int)(index -firstIndexMap.get(depth) + 1);
-        maxWidth = Math.max(maxWidth,  width);
-        dfs(node.left, depth + 1,2*index + 1);
-        dfs(node.right,depth+ 1,2* index + 2);
+}
 
+class Pair<K, V> {
+    private K key;
+    private V value;
+    public Pair(K key, V value) {
+        this.key = key;
+        this.value = value;
     }
+    public K getKey() { return key; }
+    public V getValue() { return value; }
 }
