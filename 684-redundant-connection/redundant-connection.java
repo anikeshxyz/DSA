@@ -19,14 +19,14 @@ class Solution {
             graph.get(v).add(u);
         }
 
-        return new int[1];
+        return new int[0];
     }
     
     private boolean isConnected(List<List<Integer>> graph, int src, int target, int n){
         boolean[] visited = new boolean[n + 1];
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(src);
-        visited[src]= true;
+        visited[src] = true;
         while (!queue.isEmpty()){
             int node =queue.poll();
             if (node ==target) {
