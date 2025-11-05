@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public int[][] dp;
     public int superEggDrop(int k, int n) {
