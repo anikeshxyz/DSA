@@ -27,7 +27,7 @@ class Solution {
                 }
             }
         }
-        int resultCity = 1;
+        int resultCity = -1;
         int minReachable = Integer.MAX_VALUE;
         for (int i = 0; i < n; i++) {
             int count = 0;
